@@ -1,26 +1,23 @@
-from github import Github
-from dotenv import load_dotenv
+from github_client import get_repo, get_readme
 from llm import summarize_readme
-import os
 
-load_dotenv()
 
-token = os.getenv("GITHUB_TOKEN")
+repo_name = input("Enter repository (owner/repo): ")
 
-if not token:
-    print("GitHub token not found!")
-    exit()
+repo = get_repo(repo_name)
 
-g = Github(token)
-
-repo = g.get_repo("microsoft/vscode")
-
+print("\nRepository Information")
+print("----------------------")
 print("Name:", repo.name)
 print("Description:", repo.description)
 print("Stars:", repo.stargazers_count)
 
-content = repo.get_readme().decoded_content.decode("utf-8")
+print("\nFetching README...\n")
+
+content = get_readme(repo_name)
 
 summary = summarize_readme(content)
 
+print("\nRepoReady Summary")
+print("----------------------")
 print(summary)
