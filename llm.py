@@ -56,3 +56,32 @@ Keep it concise.
     )
     return response.choices[0].message.content
 
+def recommend_starting_files(readme, important_items):
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role": "user",
+                "content": f"""
+You are helping a beginner contribute to an open-source project.
+
+README:
+{readme[:4000]}
+
+Important Files/Folders:
+{important_items}
+
+Recommend the 5 most important files/folders to read first.
+
+For each item provide:
+1. Name
+2. Why it should be read
+3. What the contributor will learn from it
+
+Keep it concise.
+"""
+            }
+        ]
+    )
+
+    return response.choices[0].message.content
