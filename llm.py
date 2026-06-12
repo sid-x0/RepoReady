@@ -33,3 +33,26 @@ README:
     )
 
     return response.choices[0].message.content
+
+
+def explain_structure(readme, structure):
+    response = client.chat.completions.create(
+        model = "llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role":"user",
+                "content": f"""
+README:
+{readme}
+
+Structure:
+{structure}
+
+Explain what each top-level folder likely does.
+Keep it concise.
+"""
+            }
+        ]
+    )
+    return response.choices[0].message.content
+
