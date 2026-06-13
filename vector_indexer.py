@@ -9,13 +9,18 @@ def build_vector_index(repo_name):
 
     for item in index:
 
-        text = (
-            item["file"]
-            + " "
-            + " ".join(item["classes"])
-            + " "
-            + " ".join(item["functions"])
-        )
+        text = f"""
+File: {item['file']}
+
+Classes:
+{' '.join(item['classes'])}
+
+Functions:
+{' '.join(item['functions'])}
+
+Code:
+{item['content']}
+"""
 
         vector = embed_text(text)
 
