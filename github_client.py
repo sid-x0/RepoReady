@@ -7,7 +7,7 @@ load_dotenv()
 token = os.getenv("GITHUB_TOKEN")
 
 if not token:
-    raise "Github token not found"
+    raise ValueError("Github token not found")
 
 g = Github(token)
 
@@ -39,3 +39,20 @@ def get_python_files(repo_name):
 
     return python_files
 
+def get_open_issues(repo_name, limit=20):
+    repo = get_repo(repo_name)
+
+    issues = repo.get_issues(state="open")
+
+    result = []
+
+    for issue in issues[:limit]:
+        result.append({
+            "number": issue.number,
+            "title": issue.title,
+            "body": issue.body or "",
+            "url": issue.html_url,
+            "labels": [l.name for l in issue.labels]
+        })
+
+    return result
