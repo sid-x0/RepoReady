@@ -3,6 +3,7 @@ from embeddings import embed_text
 
 
 def build_vector_index(repo_name):
+
     index = build_repo_index(repo_name)
 
     vector_index = []
@@ -10,17 +11,11 @@ def build_vector_index(repo_name):
     for item in index:
 
         text = f"""
-File: {item['file']}
+        File: {item['file']}
 
-Classes:
-{' '.join(item['classes'])}
-
-Functions:
-{' '.join(item['functions'])}
-
-Code:
-{item['content']}
-"""
+        Content:
+        {item['content']}
+        """
 
         vector = embed_text(text)
 

@@ -2,7 +2,7 @@ from github_client import get_repository_files
 from parser import extract_classes_functions
 
 
-def build_repo_index_v2(repo_name):
+def build_repo_index(repo_name):
 
     files = get_repository_files(repo_name)
 
