@@ -1,34 +1,43 @@
-from github_client import get_python_files
+from github_client import get_repository_files
 from parser import extract_classes_functions
 
 
-def build_repo_index(repo_name):
-    files = get_python_files(repo_name)
+def build_repo_index_v2(repo_name):
+
+    files = get_repository_files(repo_name)
 
     index = []
-    
-    SKIP_FOLDERS = [
-    "tests/",
-    "docs/",
-    "examples/"
-    ]
 
     for file in files:
+
         try:
-            content = file.decoded_content.decode("utf-8")
 
-            # Skip files in skip folders
-            if any(folder in file.path for folder in SKIP_FOLDERS):
-                continue
+            content = (
+                file.decoded_content
+                .decode("utf-8")
+            )
 
-            parsed = extract_classes_functions(content)
+            if file.path.endswith(".py"):
 
-            index.append({
-                "file": file.path,
-                "classes": parsed["classes"],
-                "functions": parsed["functions"],
-                "content": content[:2000]
-            })
+                parsed = extract_classes_functions(
+                    content
+                )
+
+                index.append({
+                    "file": file.path,
+                    "type": "code",
+                    "classes": parsed["classes"],
+                    "functions": parsed["functions"],
+                    "content": content[:2000]
+                })
+
+            else:
+
+                index.append({
+                    "file": file.path,
+                    "type": "documentation",
+                    "content": content[:2000]
+                })
 
         except Exception:
             continue
