@@ -85,3 +85,34 @@ Keep it concise.
     )
 
     return response.choices[0].message.content
+
+
+def explain_issue_matches(issue, matches):
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role": "user",
+                "content": f"""
+Issue:
+
+Title:
+{issue['title']}
+
+Body:
+{issue['body']}
+
+Relevant Files:
+{matches}
+
+Explain:
+
+1. Why these files may be relevant
+2. Where a beginner should start
+3. What kind of changes might be needed
+"""
+            }
+        ]
+    )
+
+    return response.choices[0].message.content

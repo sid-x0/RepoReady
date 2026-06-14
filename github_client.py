@@ -39,6 +39,32 @@ def get_python_files(repo_name):
 
     return python_files
 
+def get_repository_files(repo_name):
+    repo = get_repo(repo_name)
+
+    files = []
+
+    contents = repo.get_contents("")
+
+    allowed_extensions = (
+        ".py",
+        ".md",
+        ".rst"
+    )
+
+    while contents:
+        item = contents.pop(0)
+
+        if item.type == "dir":
+            contents.extend(
+                repo.get_contents(item.path)
+            )
+
+        elif item.path.endswith(allowed_extensions):
+            files.append(item)
+
+    return files
+
 def get_open_issues(repo_name, limit=20):
     repo = get_repo(repo_name)
 
