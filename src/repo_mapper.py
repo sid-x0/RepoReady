@@ -1,4 +1,4 @@
-from github_client import get_repo
+from src.github_client import get_repo
 
 def get_repo_structure(repo_name):
     repo = get_repo(repo_name)

@@ -1,7 +1,7 @@
-from github_client import get_open_issues
-from vector_indexer import build_vector_index
-from issue_analyzer import analyze_issue
-from llm import explain_issue_matches
+from src.github_client import get_open_issues
+from src.vector_indexer import build_vector_index
+from src.issue_analyzer import analyze_issue
+from src.llm import explain_issue_matches
 
 issues = get_open_issues("pallets/flask")
 

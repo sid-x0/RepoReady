@@ -1,4 +1,4 @@
-from github_client import get_repository_files
+from src.github_client import get_repository_files
 
 files = get_repository_files(
     "pallets/flask"

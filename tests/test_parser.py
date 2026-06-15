@@ -1,5 +1,5 @@
-from parser import extract_classes_functions
-from github_client import get_python_files
+from src.parser import extract_classes_functions
+from src.github_client import get_python_files
 
 files = get_python_files("pallets/flask")
 

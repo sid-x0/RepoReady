@@ -1,5 +1,5 @@
-from github_client import get_repository_files
-from parser import extract_classes_functions
+from src.github_client import get_repository_files
+from src.parser import extract_classes_functions
 
 
 def build_repo_index(repo_name):

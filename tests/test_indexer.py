@@ -1,4 +1,4 @@
-from repo_indexer import build_repo_index
+from src.repo_indexer import build_repo_index
 
 index = build_repo_index("pallets/flask")
 

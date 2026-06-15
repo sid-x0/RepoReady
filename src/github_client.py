@@ -1,6 +1,6 @@
 from github import Github
 from dotenv import load_dotenv
-from parser import extract_classes_functions
+from src.parser import extract_classes_functions
 import os
 
 load_dotenv()

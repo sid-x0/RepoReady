@@ -1,5 +1,5 @@
 import numpy as np
-from embeddings import embed_text
+from src.embeddings import embed_text
 
 
 def cosine_similarity(vec1, vec2):

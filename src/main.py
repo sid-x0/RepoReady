@@ -1,7 +1,7 @@
-from github_client import get_repo, get_readme
-from llm import summarize_readme, explain_structure, recommend_starting_files
-from repo_mapper import get_repo_structure 
-from starter import find_important_items
+from src.github_client import get_repo, get_readme
+from src.llm import summarize_readme, explain_structure, recommend_starting_files
+from src.repo_mapper import get_repo_structure 
+from src.starter import find_important_items
 
 
 repo_name = input("Enter repository (owner/repo): ")
