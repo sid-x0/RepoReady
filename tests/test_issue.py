@@ -30,8 +30,7 @@ match_files = []
 for score, item in matches:
     match_files.append({
     "file": item["file"],
-    "classes": item["classes"],
-    "functions": item["functions"]
+    "type": item["type"]
     })
     
 explanation = explain_issue_matches(issue, match_files)

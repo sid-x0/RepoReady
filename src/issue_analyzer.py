@@ -12,9 +12,12 @@ def analyze_issue(issue, vector_index):
 
     filenames = re.findall(
         r'[\w\-]+\.(?:py|rst|md|js|ts)',
-        issue_text
+        issue['title'] 
     )
-
+    # TEST 
+    print("Extracted filenames:", filenames)
+    
+    
     direct_matches = []
 
     for item in vector_index:
@@ -41,7 +44,7 @@ def analyze_issue(issue, vector_index):
     for item in direct_matches:
 
         final_results.append(
-            (999.0, item)
+            (100.0, item)
         )
 
         seen.add(item["file"])

@@ -105,11 +105,12 @@ Body:
 Relevant Files:
 {matches}
 
-Explain:
+Using ONLY the issue text and file names provided:
 
-1. Why these files may be relevant
-2. Where a beginner should start
-3. What kind of changes might be needed
+1. Explain why each file was matched.
+2. Identify which files are directly mentioned.
+3. Identify which files are related suggestions.
+4. Do not assume any additional changes unless explicitly stated in the issue.
 """
             }
         ]
