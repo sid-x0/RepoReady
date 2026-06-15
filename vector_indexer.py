@@ -9,9 +9,18 @@ def build_vector_index(repo_name):
     vector_index = []
 
     for item in index:
+        
+        filename = item["file"].split("/")[-1]
 
         text = f"""
-        File: {item['file']}
+        Filename: 
+        {filename}
+        
+        Full Path:
+        {item['file']}
+        
+        Type:
+        {item['type']}
 
         Content:
         {item['content']}
