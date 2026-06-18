@@ -48,6 +48,8 @@ def analyze_issue(issue, vector_index):
         )
 
         seen.add(item["file"])
+    
+    
 
     for score, item in semantic_results:
 

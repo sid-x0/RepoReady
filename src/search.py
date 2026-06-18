@@ -1,12 +1,18 @@
 def search_symbol(index, query):
+
     results = []
+
+    query = query.lower()
 
     for item in index:
 
-        if query in item["classes"]:
+        classes = item.get("classes", [])
+        functions = item.get("functions", [])
+
+        if any(query in cls.lower() for cls in classes):
             results.append(item)
 
-        elif query in item["functions"]:
+        elif any(query in func.lower() for func in functions):
             results.append(item)
 
     return results
