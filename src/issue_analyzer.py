@@ -14,8 +14,7 @@ def analyze_issue(issue, vector_index):
         r'[\w\-]+\.(?:py|rst|md|js|ts)',
         issue['title'] 
     )
-    # TEST 
-    print("Extracted filenames:", filenames)
+    
     
     
     direct_matches = []
@@ -48,7 +47,6 @@ def analyze_issue(issue, vector_index):
         )
 
         seen.add(item["file"])
-    
     
 
     for score, item in semantic_results:
