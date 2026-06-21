@@ -1,5 +1,6 @@
 import numpy as np
 from src.embeddings import embed_text
+import re
 
 
 def cosine_similarity(vec1, vec2):
@@ -23,6 +24,11 @@ def semantic_search(vector_index, query, top_k=5):
     results = []
 
     query_words = query.lower().split()
+    
+    symbols = re.findall(
+        r"[A-Za-z_][A-Za-z0-9_]*",
+        query
+    )
 
     for item in vector_index:
 
@@ -34,16 +40,35 @@ def semantic_search(vector_index, query, top_k=5):
         file_path = item["file"].lower()
         filename = item["file"].split("/")[-1].lower()
 
+        content = item.get(
+            "content",
+            ""
+        ).lower()
+        
+        if item["type"] == "code":
+            score += 0.5
+
         for word in query_words:
 
             if len(word) <= 3:
                 continue
 
             if word in filename:
-                score += 0.30
+                score += 0.50
 
             elif word in file_path:
-                score += 0.05
+                score += 0.20
+
+            if word in content:
+                score += 0.40
+                
+        for symbol in symbols:
+
+            if len(symbol) <= 3:
+                continue
+
+            if symbol.lower() in content:
+                score += 5.0
 
         results.append(
             (score, item)
@@ -53,5 +78,14 @@ def semantic_search(vector_index, query, top_k=5):
         reverse=True,
         key=lambda x: x[0]
     )
+
+    print("\nTop 10 Rankings:")
+
+    for score, item in results[:10]:
+        print(
+            round(score, 3),
+            item["file"]
+        )
+
 
     return results[:top_k]

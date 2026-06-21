@@ -4,3 +4,4 @@ venv/
 .env
 .vscode/
 gameplan.md
+cache/
