@@ -28,7 +28,7 @@ def build_repo_index(repo_name):
                     "type": "code",
                     "classes": parsed["classes"],
                     "functions": parsed["functions"],
-                    "content": content[:2000]
+                    "content": content[:10000]
                 })
 
             else:
@@ -36,7 +36,7 @@ def build_repo_index(repo_name):
                 index.append({
                     "file": file.path,
                     "type": "documentation",
-                    "content": content[:2000]
+                    "content": content[:10000]
                 })
 
         except Exception:

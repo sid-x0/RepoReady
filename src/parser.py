@@ -10,22 +10,48 @@ def parse_python_code(code):
     return tree
 
 def extract_classes_functions(code):
-    tree = parser.parse(bytes(code, "utf8"))
+
+    tree = parser.parse(
+        bytes(code, "utf8")
+    )
 
     root = tree.root_node
 
     classes = []
     functions = []
 
-    for child in root.children:
+    def visit(node):
 
-        if child.type == "class_definition":
-            name_node = child.child_by_field_name("name")
-            classes.append(name_node.text.decode())
+        if node.type == "class_definition":
 
-        elif child.type == "function_definition":
-            name_node = child.child_by_field_name("name")
-            functions.append(name_node.text.decode())
+            name_node = (
+                node.child_by_field_name(
+                    "name"
+                )
+            )
+
+            if name_node:
+                classes.append(
+                    name_node.text.decode()
+                )
+
+        elif node.type == "function_definition":
+
+            name_node = (
+                node.child_by_field_name(
+                    "name"
+                )
+            )
+
+            if name_node:
+                functions.append(
+                    name_node.text.decode()
+                )
+
+        for child in node.children:
+            visit(child)
+
+    visit(root)
 
     return {
         "classes": classes,

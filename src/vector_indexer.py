@@ -37,10 +37,15 @@ def build_vector_index(repo_name):
         Type:
         {item['type']}
 
-        Content:
-        {item['content']}
-        """
+        Classes:
+        {' '.join(item.get('classes', []))}
 
+        Functions:
+        {' '.join(item.get('functions', []))}
+
+        Content:
+        {item['content'][:1000]}
+        """
         vector = embed_text(text)
 
         vector_index.append({
